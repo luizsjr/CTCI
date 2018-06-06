@@ -80,7 +80,7 @@ public class C1P2 {
 			return false;
 		}
 		
-		int[] letters = new int[128]; //assuming char set is ASCII
+		int[] letters = new int[128]; // Assuming the char set is ASCII
 		
 		for (int i=0; i < strA.length(); i++) {
 			char c = strA.charAt(i);
