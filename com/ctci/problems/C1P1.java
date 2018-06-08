@@ -1,4 +1,4 @@
-package com.ctci;
+package com.ctci.problems;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package com.ctci;
+package com.ctci.problems;
 
 public class C1P9 {
 
