@@ -66,10 +66,11 @@ public class SinglyLinkedList<I> {
 	
 	protected ListNode<I> findPrevious(I value) {
 		ListNode<I> node = first;
-		while ( node!=null && 
-				node.getNext() != null && 
-				!node.getNext().getData().equals(value)
-		) {
+		while (node!=null) {
+			ListNode<I> nodeNext = node.getNext();
+			if ( nodeNext!=null && 
+				 nodeNext.getData()!=null && 
+				 nodeNext.getData().equals(value) ) return node;
 			node = node.getNext();
 		}
 		return node;
@@ -104,6 +105,7 @@ public class SinglyLinkedList<I> {
 		list.resetCurrent();
 		System.out.println(list.next()); //a
 		list.resetCurrent();
+		System.out.println(list.remove('x')); //false;
 		list.remove('a');
 		System.out.println(list.next()); //b
 		list.remove('c');
