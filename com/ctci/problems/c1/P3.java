@@ -1,9 +1,9 @@
-package com.ctci.problems;
+package com.ctci.problems.c1;
 
-public class C1P3 {
+public class P3 {
 
 	public static void main(String[] args) {
-		C1P3 problem = new C1P3();
+		P3 problem = new P3();
 		
 		char[] str = "Mr John Smith    ".toCharArray();
 		int realSize = 13;

@@ -1,12 +1,12 @@
-package com.ctci.problems;
+package com.ctci.problems.c1;
 
-public class C1P9 {
+public class P9 {
 
 	public static void main(String[] args) {
 		
 		String s1 = "waterwaster";
 		String s2 = "wasterwater";
-		C1P9 problem = new C1P9();
+		P9 problem = new P9();
 		System.out.println(problem.isRotation(s1, s2));
 	}
 	

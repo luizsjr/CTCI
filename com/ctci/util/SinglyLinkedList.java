@@ -29,16 +29,24 @@ public class SinglyLinkedList<I> {
 	}
 	
 	public I next() {
-		if (current!=null) {
-			I value = current.getData();
-			current = current.getNext();
-			return value;
-		}
-		return null;
+		return current(true);
+	}
+	
+	public I current() {
+		return current(false);
 	}
 	
 	public void resetCurrent() {
 		current = first;
+	}
+	
+	protected I current(boolean moveCurrent) {
+		if (current!=null) {
+			I value = current.getData();
+			if (moveCurrent) current = current.getNext();
+			return value;
+		}
+		return null;
 	}
 	
 	public boolean remove(I value) {
@@ -96,6 +104,7 @@ public class SinglyLinkedList<I> {
 		list.add('d');
 		list.add('e');
 		System.out.println(list.toString()); // a b c d e
+		System.out.println(list.current()); //a
 
 		while(list.hasNext()) {
 			System.out.println(list.next()); // a to e

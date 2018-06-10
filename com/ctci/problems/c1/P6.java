@@ -1,9 +1,9 @@
-package com.ctci.problems;
+package com.ctci.problems.c1;
 
-public class C1P6 {
+public class P6 {
 
 	public static void main(String[] args) {
-		C1P6 problem = new C1P6();
+		P6 problem = new P6();
 		
 //		String str = "aaabbccccccdde";
 		String str = "aabbcccddee";

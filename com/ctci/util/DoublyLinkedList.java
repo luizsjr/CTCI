@@ -36,8 +36,24 @@ public class DoublyLinkedList<I> {
 		current = first;
 	}
 	
+	public boolean removeFirst() {
+		return remove(first);
+	}
+	
+	public boolean removeLast() {
+		return remove(last);
+	}
+	
+	public boolean removeCurrent() {
+		return remove(current);
+	}
+	
 	public boolean remove(I value) {
 		ListNode<I> node = find(value);
+		return (node != null && remove(node) );
+	}
+	
+	protected boolean remove(ListNode<I> node) {
 		if (node != null) {
 			ListNode<I> previous = node.getPrevious();
 			ListNode<I> next = node.getNext();

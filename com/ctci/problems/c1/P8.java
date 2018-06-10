@@ -1,12 +1,12 @@
-package com.ctci.problems;
+package com.ctci.problems.c1;
 
-public class C1P8 {
+public class P8 {
 
 	private int[][] m;
 	private boolean[] rowsToZero;
 	private boolean[] colsToZero;
 	
-	public C1P8(int[][] m) {
+	public P8(int[][] m) {
 		assert (m == null || m.length == 0 || m[0].length==0);
 		this.m=m;
 		rowsToZero = new boolean[m.length];
@@ -75,7 +75,7 @@ public class C1P8 {
 				{1,1,1,1,1,1}
 		};
 		
-		C1P8 problem = new C1P8(m);
+		P8 problem = new P8(m);
 		problem.printMatrix();
 		problem.zeroMatrix();
 		problem.printMatrix();

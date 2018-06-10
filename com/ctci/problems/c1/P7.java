@@ -1,10 +1,10 @@
-package com.ctci.problems;
+package com.ctci.problems.c1;
 
-public class C1P7 {
+public class P7 {
 
 	private int[][] m;
 	
-	public C1P7(int mSize) {
+	public P7(int mSize) {
 		initMatrix(mSize);
 	}
 	
@@ -63,7 +63,7 @@ public class C1P7 {
 	
 	public static void main(String[] args) {
 		int mSize = 6;
-		C1P7 problem = new C1P7(mSize);
+		P7 problem = new P7(mSize);
 		problem.printMatrix();
 		if ( problem.rotateMatrixClockWise() ) {
 			problem.printMatrix();

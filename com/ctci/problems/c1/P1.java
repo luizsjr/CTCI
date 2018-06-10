@@ -1,16 +1,16 @@
-package com.ctci.problems;
+package com.ctci.problems.c1;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
-public class C1P1 {
+public class P1 {
 	
 	public static void main(String[] args) {
 		String str = "abc .d";
 		
-		System.out.println(C1P1.hasRepeatedChars(str));
-		System.out.println(C1P1.hasRepeatedChars2(str));
-		System.out.println(C1P1.hasRepeatedChars3(str.toCharArray()));
+		System.out.println(P1.hasRepeatedChars(str));
+		System.out.println(P1.hasRepeatedChars2(str));
+		System.out.println(P1.hasRepeatedChars3(str.toCharArray()));
 	}
 	
 	// O(n) Using a Set

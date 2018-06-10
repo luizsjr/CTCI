@@ -1,12 +1,12 @@
-package com.ctci.problems;
+package com.ctci.problems.c1;
 
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class C1P2 {
+public class P2 {
 
 	public static void main(String[] args) {
-		C1P2 problem = new C1P2();
+		P2 problem = new P2();
 		
 		String strA = "abcc";
 		String strB = "cbca";

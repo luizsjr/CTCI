@@ -1,11 +1,11 @@
-package com.ctci.problems;
+package com.ctci.problems.c1;
 
-public class C1P4 {
+public class P4 {
 	
 	public static void main(String[] args) {
 		String str = "ababcaa";
 		
-		C1P4 problem = new C1P4();
+		P4 problem = new P4();
 		System.out.println(problem.isPalindromePermutation(str));
 		System.out.println(problem.isPalindromePermutation2(str));
 	}

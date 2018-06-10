@@ -1,12 +1,12 @@
-package com.ctci.problems;
+package com.ctci.problems.c1;
 
-public class C1P5 {
+public class P5 {
 
 	public static void main(String[] args) {
 		String strA = "pale";
 		String strB = "pales";
 		
-		C1P5 problem = new C1P5();
+		P5 problem = new P5();
 		System.out.println(problem.isOneAway(strA, strB));
 		System.out.println(problem.isOneAway2(strA, strB));
 	}
