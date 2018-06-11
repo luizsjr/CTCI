@@ -4,32 +4,29 @@ import com.ctci.util.ListNode;
 
 public class P4 {
 	
-	public ListNode<Integer> partitionList(ListNode<Integer> head, int value) {
-		ListNode<Integer> left = head;
-		if(left!=null) {
-			ListNode<Integer> next = head.getNext();
-			left.setNext(null);
-			ListNode<Integer> pivot = head;
-			ListNode<Integer> right = head;
-			
-			while (next!=null) {
-				ListNode<Integer> n = next;
-				next = n.getNext();
-				if (n.getData() < value) {
-					n.setNext(left);
-					left = n;
-				} else if (n.getData() > value) {
-					right.setNext(n);
-					right = n;
-				} else { // This solution will keep the pivot elements in the middle of the list
-					n.setNext(pivot.getNext());
-					pivot.setNext(n);
-					if(right==pivot) right=n;
-					pivot = n;
-				}
+	public ListNode<Integer> partitionList(ListNode<Integer> node, int value) {
+		ListNode<Integer> left = node;
+		ListNode<Integer> pivot = node;
+		ListNode<Integer> right = node;
+		
+		while (node!=null) {
+			ListNode<Integer> next = node.getNext();
+			if (node.getData() < value) {
+				node.setNext(left);
+				left = node;
+			} else if (node.getData() > value) {
+				right.setNext(node);
+				right = node;
+			} else { // This solution will keep the pivot elements in the middle of the list
+				node.setNext(pivot.getNext());
+				pivot.setNext(node);
+				if(right==pivot) right=node;
+				pivot = node;
 			}
-			right.setNext(null);
+			node = next;
 		}
+		right.setNext(null);
+		
 		return left;
 	}
 	
@@ -39,7 +36,5 @@ public class P4 {
 		System.out.println(head.getListNodeString());
 		head = problem.partitionList(head, 5);
 		System.out.println(head.getListNodeString());
-
 	}
-
 }
