@@ -10,6 +10,20 @@ public class ListNode<I> {
 		this.data = data;
 	}
 	
+	@SafeVarargs
+	public ListNode(I...items){
+		if (items.length > 0) {
+			this.data = items[0];
+		}
+		ListNode<I> n = this;
+		for (int i=1; i<items.length; i++) {
+			ListNode<I> n1 = new ListNode<>(items[i]);
+			n.setNext(n1);
+			n1.setPrevious(n);
+			n = n1;
+		}
+	}
+	
 	public ListNode<I> getPrevious() {
 		return previous;
 	}
@@ -32,5 +46,16 @@ public class ListNode<I> {
 	
 	public void setData(I data) {
 		this.data = data;
+	}
+	
+	public String getListNodeString() {
+		ListNode<I> n = this;
+		StringBuilder sb = new StringBuilder();
+		while (n!=null) {
+			sb.append(n.getData());
+			n = n.getNext();
+			if (n != null) sb.append(", ");
+		}
+		return sb.toString();
 	}
 }

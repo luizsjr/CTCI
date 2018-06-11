@@ -8,6 +8,11 @@ public class P1<I> {
 	
 	private ListNode<I> head;
 	
+	@SafeVarargs
+	public P1(I...items) {
+		this.head = new ListNode<I>(items);
+	}
+	
 	// O(n) - with buffer
 	public void removeDups() {
 		HashSet<I> buffer = new HashSet<>();
@@ -30,10 +35,9 @@ public class P1<I> {
 	public void removeDups2() {
 		ListNode<I> n = head;
 		while (n!=null) {
-			I valueN = n.getData();
 			ListNode<I> nPlus1 = n.getNext();
 			while (nPlus1!=null) {
-				if (valueN.equals(nPlus1.getData())) { // null values are not allowed
+				if (n.getData().equals(nPlus1.getData())) { // null values are not allowed
 					ListNode<I> next = nPlus1.getNext();
 					ListNode<I> previous = nPlus1.getPrevious();
 					if (previous != null) previous.setNext(next);
@@ -46,44 +50,22 @@ public class P1<I> {
 	}
 	
 	public void printList() {
-		ListNode<I> n = head;
-		StringBuilder sb = new StringBuilder();
-		while (n!=null) {
-			sb.append(n.getData() + " ");
-			n = n.getNext();
-		}
-		System.out.println(sb);
+		System.out.println(head.getListNodeString());
 	}
 	
 	public static void main(String[] args) {
-		P1<Character> problem = new P1<>();
-		
 		Character[] list = {'a','a','b','b','a','c','b'};
+		P1<Character> problem = new P1<>(list);
 		
-		problem.generateTestList(list);
 		problem.printList();
 		problem.removeDups();
 		problem.printList();
 		
 		System.out.println("============================");
 		
-		problem.generateTestList(list);
+		problem = new P1<>(list);
 		problem.printList();
 		problem.removeDups2();
 		problem.printList();
-	}
-	
-	@SafeVarargs
-	public final void generateTestList(I...items){
-		if (items.length > 0) {
-			head = new ListNode<I>(items[0]);
-		}
-		ListNode<I> n = head;
-		for (int i=1; i<items.length; i++) {
-			ListNode<I> n1 = new ListNode<>(items[i]);
-			n.setNext(n1);
-			n1.setPrevious(n);
-			n = n1;
-		}
 	}
 }
