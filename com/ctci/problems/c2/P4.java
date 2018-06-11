@@ -4,6 +4,7 @@ import com.ctci.util.ListNode;
 
 public class P4 {
 	
+	// O(n)
 	public ListNode<Integer> partitionList(ListNode<Integer> node, int value) {
 		ListNode<Integer> left = node;
 		ListNode<Integer> pivot = node;
