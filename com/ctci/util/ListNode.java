@@ -24,6 +24,16 @@ public class ListNode<I> {
 		}
 	}
 	
+	public int length() {
+		ListNode<I> node = this;
+		int length = 0;
+		while(node!=null) {
+			length++;
+			node = node.getNext();
+		}
+		return length;
+	}
+	
 	public ListNode<I> getPrevious() {
 		return previous;
 	}
