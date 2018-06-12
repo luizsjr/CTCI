@@ -44,6 +44,7 @@ public class P5 {
 		return result;
 	}
 	
+	// O(n) - Follow up problem. A simpler solution would be inverting the lists and summing using the first solution
 	public ListNode<Integer> sumListsInverseOrder(ListNode<Integer> l1, ListNode<Integer> l2) {
 		
 		int l1Length = l1.length();
