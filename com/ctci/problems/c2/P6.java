@@ -72,6 +72,54 @@ public class P6 {
 		return true;
 	}
 	
+	protected class Result {
+		private boolean palindrome;
+		private ListNode<Character> node;
+		
+		public Result(boolean palindrome, ListNode<Character> node) {
+			super();
+			this.palindrome = palindrome;
+			this.node = node;
+		}
+		public boolean isPalindrome() {
+			return palindrome;
+		}
+		public void setPalindrome(boolean palindrome) {
+			this.palindrome = palindrome;
+		}
+		public ListNode<Character> getNode() {
+			return node;
+		}
+		public void setNode(ListNode<Character> node) {
+			this.node = node;
+		}
+	}
+	
+	// O(n) - Recursive
+	public boolean isPalindromeR(ListNode<Character> node) {
+		if (node==null) { return false; }
+		Result r = isPalindrome(node, node.length());
+		return r.isPalindrome();
+	}
+	protected Result isPalindrome(ListNode<Character> node, int len) {
+		// Base Case
+		if (len == 1) {return new Result(true,node.getNext()); } // list size is odd
+		if (len <= 0) {return new Result(true,node); } // list size is even
+		
+		// Recurse
+		Result r = isPalindrome(node.getNext(), len-2);
+		
+		// already discovered its not a palindrome or reached the end of the list
+		if(!r.isPalindrome() || r.getNode()==null) {
+			return r;
+		}
+		
+		// Compare node with returned node and move
+		r.setPalindrome( node.getData().equals(r.getNode().getData()) );
+		r.setNode(r.getNode().getNext());
+		return r;
+	}
+	
 	public static void main(String[] args) {
 		P6 problem = new P6();
 		Character[] items = {'a','b','c','b','a'};
@@ -81,6 +129,9 @@ public class P6 {
 		
 		list = new ListNode<Character>(items);
 		System.out.println( problem.isPalindrome2(list) );
+		
+		list = new ListNode<Character>(items);
+		System.out.println( problem.isPalindromeR(list) );
 		
 	}
 }
