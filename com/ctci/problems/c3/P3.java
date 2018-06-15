@@ -58,6 +58,8 @@ public class P3<I> {
 		return retrieve(stackId, false);
 	}
 	
+	// Assuming it's ok having stacks with different sizes if pop was executed in a middle stack
+	// Otherwise a shifting elements from the top stacks would be needed
 	protected I retrieve(int stackId, boolean peek) {
 		Stack<I> stack = getStack(stackId);
 		if (stack==null) {
