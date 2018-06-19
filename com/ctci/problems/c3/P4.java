@@ -42,6 +42,7 @@ public class P4<T> {
 		return poll.peek();
 	}
 	
+	// O(n)
 	protected void shiftStacks() {
 		while (!add.isEmpty()) {
 			poll.push(add.pop());
