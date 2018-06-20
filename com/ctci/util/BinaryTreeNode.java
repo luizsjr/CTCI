@@ -11,4 +11,9 @@ public class BinaryTreeNode<T> {
 		data = value;
 		visited = false;
 	}
+	
+	@Override
+	public String toString() {
+		return data.toString();
+	}
 }
