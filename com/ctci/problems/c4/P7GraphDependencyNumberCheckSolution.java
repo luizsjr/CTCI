@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class P7GraphSolution1 {
+public class P7GraphDependencyNumberCheckSolution {
 	
 	public Project[] findBuildOrder(String[] projects, String[][] dependencies) {
 		Graph projGraph = generateGraph(projects, dependencies);
@@ -121,7 +121,7 @@ public class P7GraphSolution1 {
 	}
 	
 	public static void main(String[] args) {
-		P7GraphSolution1 problem = new P7GraphSolution1();
+		P7GraphDependencyNumberCheckSolution problem = new P7GraphDependencyNumberCheckSolution();
 		String[] projects = {"a","b","c","d","e","f","g"};
 		String[][] dependencies = {{"f","c"},{"f","b"},{"f","a"},{"c","a"},{"b","a"},{"a","e"},{"b","e"},{"d","g"}};
 		Project[] buildOrder = problem.findBuildOrder(projects,dependencies);
@@ -134,6 +134,5 @@ public class P7GraphSolution1 {
 		for(Project p : buildOrder) {
 			System.out.println(p);
 		}
-
 	}
 }
