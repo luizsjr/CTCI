@@ -19,45 +19,47 @@ public class P8<T> {
 			foundB=fB;
 			node=n;
 		}
+		
+		public void merge(Result r) {
+			foundA = foundA || r.foundA;
+			foundB = foundB || r.foundB;
+			node = r.node;
+		}
+		
+		public void merge(boolean fA, boolean fB, BinaryTreeNode<T> n) {
+			foundA = foundA || fA;
+			foundB = foundB || fB;
+			node = n;
+		}
 	}
 	
 	protected Result findCommonAncestorRecursive(BinaryTreeNode<T> tree, BinaryTreeNode<T> nodeA, BinaryTreeNode<T> nodeB) {
 		
-		// End of the tree, return what was found so far
-		if (tree==null) { 
-			return new Result(nodeA==null, nodeB==null, null);
-		}
-		
-		// Check if tree is A or B
-		if (nodeA==tree) { nodeA=null; }
-		if (nodeB==tree) { nodeB=null; }
-		
-		// Found both nodes, stop searching
-		if (nodeA==null && nodeB==null) {
-			return new Result(true, true, null);
-		}
+		// End of the tree
+		if (tree==null) { return new Result(false, false, null); }
 		
 		// Search on the left side
-		Result resultLeft = findCommonAncestorRecursive(tree.left, nodeA, nodeB);
+		Result result = findCommonAncestorRecursive(tree.left, nodeA, nodeB);
 		
 		// Check if left result is conclusive
-		if (validateResult(resultLeft, tree)) {	return resultLeft; }
+		if (validateResult(result, tree)) {	return result; }
 		
 		// Search on the right side
 		Result resultRight = findCommonAncestorRecursive(tree.right, nodeA, nodeB);
 		
-		// Merge Left and Right results
-		resultRight.foundA = resultLeft.foundA || resultRight.foundA;
-		resultRight.foundB = resultLeft.foundB || resultRight.foundB;
+		// Merge Left & Right results
+		result.merge(resultRight);
+
+		// Check if merged result is conclusive
+		if (validateResult(result, tree)) { return result; }
 		
-		// Check if right result is conclusive
-		validateResult(resultRight, tree);
-		
-		return resultRight;
+		// Check if current node is nodeA or nodeB, merge and return
+		result.merge(tree==nodeA, tree==nodeB, null);
+		return result;
 	}
 	
 	protected boolean validateResult(Result result, BinaryTreeNode<T> tree) {
-		//Found the ancestor inside the tree, return it
+		// the ancestor already found, just return it
 		if (result.node!=null) { return true; }
 		
 		//tree is the common ancestor, set in the result object
@@ -66,6 +68,14 @@ public class P8<T> {
 			return true;
 		}
 		return false;
+	}
+	
+	public static void main(String[] args) {
+		P8<Integer> problem = new P8<>();
+		BinaryTreeNode<Integer>[] nodes = problem.buildBinarySearchTree(true);
+		System.out.println( problem.findCommonAncestor(nodes[0], nodes[7], nodes[5]) ); // 12
+		System.out.println( problem.findCommonAncestor(nodes[0], nodes[9], nodes[8]) ); // 7
+		System.out.println( problem.findCommonAncestor(nodes[0], nodes[1], new BinaryTreeNode<Integer>(90)) ); // null
 	}
 	
 	/*
@@ -91,15 +101,15 @@ public class P8<T> {
 		nodes[1].left = nodes[3];
 		nodes[1].right = nodes[4];
 		nodes[1].parent = nodes[0];
-
+		
 		nodes[2].data = 12;
 		nodes[2].left = nodes[5];
 		nodes[2].parent = nodes[0];
-
+		
 		nodes[3].data = 4;
 		nodes[3].left = nodes[6];
 		nodes[3].parent = nodes[1];
-
+		
 		nodes[4].data = isBalanced ? 6 : 5;
 		nodes[4].parent = nodes[1];
 		
@@ -126,11 +136,5 @@ public class P8<T> {
 		nodes[10].parent = nodes[6];
 		
 		return nodes;
-	}
-	
-	public static void main(String[] args) {
-		P8<Integer> problem = new P8<>();
-		BinaryTreeNode<Integer>[] nodes = problem.buildBinarySearchTree(true);
-		System.out.println( problem.findCommonAncestor(nodes[0], nodes[5], nodes[8]) );
 	}
 }
