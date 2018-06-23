@@ -1,2 +1,2 @@
 # CTCI
-My Java solutions for the book "Cracking the Coding Interview" exercises
+My solutions (in Java) for the exercises found in the book "Cracking the Coding Interview"
