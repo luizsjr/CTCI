@@ -25,7 +25,7 @@ public class P11 {
 		public BinarySearchTreeNode root;
 		public int size;
 		
-		public BinarySearchTree(int rootValue) {
+		public BinarySearchTree() {
 			size=0;
 		}
 		
@@ -47,9 +47,11 @@ public class P11 {
 			if (value>node.value) {
 				node.sizeRight++;
 				newNode = insert(node.right, value);
+				if(node.right==null) { node.right = newNode; }
 			} else {
 				node.sizeLeft++;
 				newNode = insert(node.left, value);
+				if(node.left==null) { node.left = newNode; }
 			}
 			return newNode;
 		}
@@ -75,12 +77,16 @@ public class P11 {
 			return find(node.left, value);
 		}
 		
+		public boolean delete(int value) {
+			return delete(null, root, value);
+		}
+		
 		protected boolean delete(BinarySearchTreeNode parent, BinarySearchTreeNode node, int value) {
 			if (node==null) {
 				return false;
 			}
 			if (value==node.value) {
-				// delete node
+				deleteNode(parent, node);
 				return true;
 			}
 			if (value>node.value) {
@@ -98,16 +104,106 @@ public class P11 {
 		}
 		
 		protected void deleteNode(BinarySearchTreeNode parent, BinarySearchTreeNode node) {
-			// Delete when node is a leaf or has only right side under it
-			if(node.left==null) {
-				parent.right=node.right;
+			// Node is a leaf
+			if (node.left==null && node.right==null) {
+				deleteLeaf(parent, node);
 				return;
 			}
-			// Delete when node has left side under it
-			BinarySearchTreeNode swapNode = findSwap(node.left);
-			parent.left.value=swapNode.value;
 			
+			// Node has only one child
+			if (node.left==null || node.right==null) {
+				skipNode(parent, node);
+				return;
+			}
+			
+			// Node has two children
+			replaceByInOrderSucessor(node);
 		}
+		
+		protected void deleteLeaf(BinarySearchTreeNode parent, BinarySearchTreeNode node) {
+			// The leaf is the root itself
+			if(parent==null) {
+				root=null;
+				return;
+			}
+			
+			// Check left or right
+			if(parent.left==node) {
+				parent.left=null;
+				parent.sizeLeft--;
+				return;
+			}
+			
+			parent.right=null;
+			parent.sizeRight--;
+		}
+		
+		protected void skipNode(BinarySearchTreeNode parent, BinarySearchTreeNode node) {
+			
+			BinarySearchTreeNode newNode = node.left==null ? node.right : node.left; 
+			
+			// Node being skipped is the root
+			if (parent==null) {
+				root = newNode;
+				return;
+			}
+			
+			if (parent.left==node) { 
+				parent.left = newNode;
+				parent.sizeLeft--;
+			} else {
+				parent.right = newNode;
+				parent.sizeRight--;
+			}
+		}
+		
+		protected void replaceByInOrderSucessor(BinarySearchTreeNode node) {
+			replaceByInOrderSucessor(node, node.right, node);
+			node.sizeRight--;
+		}
+		
+		protected void replaceByInOrderSucessor(BinarySearchTreeNode replacementParent, BinarySearchTreeNode replacement, BinarySearchTreeNode node) {
+			// replacement is a leaf - use it
+			if (replacement.left==null && replacement.right==null) {
+				if (replacementParent.left==replacement) { 
+					replacementParent.left=null;	
+					replacementParent.sizeLeft--;
+				}
+				if (replacementParent.right==replacement) {	
+					replacementParent.right=null; 
+					replacementParent.sizeRight--;
+				}
+				node.value=replacement.value;
+				return;
+			}
+			// only goes right if left is null
+			if (replacement.left==null) {
+				replaceByInOrderSucessor(replacement, replacement.right, node);
+				replacementParent.sizeRight--;
+			// otherwise go left
+			} else {
+				replaceByInOrderSucessor(replacement, replacement.left, node);
+				replacementParent.sizeLeft--;
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		P11 problem = new P11();
+		BinarySearchTree tree = problem.new BinarySearchTree();
+		tree.insert(10);
+		tree.insert(5);
+		tree.insert(20);
+		tree.insert(1);
+		tree.insert(15);
+		tree.insert(30);
+		tree.insert(12);
+		tree.insert(19);
+		tree.insert(29);
+		tree.insert(13);
+		tree.insert(17);
+		
+		tree.delete(10);
 	}
 
 }
