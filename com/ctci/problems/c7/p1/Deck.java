@@ -27,16 +27,17 @@ public class Deck<T extends Card> {
 		nextCard=0;
 	}
 	
-	public Hand<T> dealHand(int numCards) {
-		List<T> handCards = new ArrayList<>(numCards);
+	public List<T> dealHand(int numCards) {
+		List<T> hand = new ArrayList<>(numCards);
 		for(int i=0; i<numCards; i++) {
-			handCards.add(dealCard());
+			T c = dealCard();
+			if(c!=null) { hand.add(c); }
 		}
-		return new Hand<T>(handCards);
+		return hand;
 	}
 	
 	public T dealCard() {
-		if (getCardAvailable()==0) {
+		if (getCardsAvailable()==0) {
 			return null;
 		}
 		T card = cards.get(nextCard++);
@@ -44,7 +45,7 @@ public class Deck<T extends Card> {
 		return card;
 	}
 	
-	public int getCardAvailable() {
+	public int getCardsAvailable() {
 		return cards.size()-nextCard;
 	}
 }

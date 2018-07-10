@@ -25,7 +25,15 @@ public class Hand<T extends Card> {
 		cards.add(card);
 	}
 	
-	public void dropCard(T card) {
-		cards.remove(card);
+	@Override
+	public String toString() {
+		if(cards==null||cards.isEmpty()) {
+			return "Empty Hand";
+		}
+		StringBuilder sb = new StringBuilder();
+		for(Card c : cards) {
+			sb.append(c).append('\n');
+		}
+		return sb.toString();
 	}
 }
