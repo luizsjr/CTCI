@@ -28,6 +28,6 @@ public class P9 {
 	
 	public static void main(String[] args) {
 		P9 problem = new P9();
-		System.out.println(problem.parentesisCombinations(3)); // [((())), (()()), (())(), ()(()), ()()()]
+		System.out.println(problem.parentesisCombinations(4)); // [((())), (()()), (())(), ()(()), ()()()]
 	}
 }
